@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Vienna Recycling Compass",
+  "description": "Interactive waste sorting guide for Vienna with robust multi-language search support, collection maps, and local guides, fully supported by the European Solidarity Corps.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

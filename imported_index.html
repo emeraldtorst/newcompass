@@ -1,0 +1,2179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vienna Trashtalk | Fun Waste Sorting Guides</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.3.0/dist/dotlottie-wc.js" type="module"></script>
+    <!-- Add Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+    <!-- Add Mailchimp script in the head section -->
+    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/YOUR_USER_ID/UNIQUE_ID.js");</script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Montserrat:wght@300;500;700&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        :root {
+            --green: #7BD785;
+            --blue: #4FC9E8;
+            --yellow: #FFE066;
+            --coral: #FF8A7A;
+            --purple: #A68AFF;
+            --text: #2E3A40;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text);
+            background-color: #F9F9F9;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+            cursor: auto;
+        }
+        
+        h1, h2, h3, .font-fredoka {
+            font-family: 'Fredoka', sans-serif;
+        }
+        
+        .glass-effect {
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+        
+        .rounded-super {
+            border-radius: 2rem;
+        }
+        
+        .btn-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .btn-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .btn-hover:active {
+            transform: translateY(1px);
+        }
+        
+        .waste-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .waste-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .waste-card:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .waste-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .waste-item-btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .waste-item-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+        
+        .waste-item-btn:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .waste-item-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .wiggle:hover {
+            animation: wiggle 0.6s ease;
+        }
+        
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(3deg); }
+            75% { transform: rotate(-3deg); }
+        }
+        
+        .bounce-in {
+            animation: bounceIn 0.8s ease;
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.9); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* 3D Animation Container */
+        #header-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Mobile Responsiveness Fixes */
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            h1 {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+            }
+
+            h2 {
+                font-size: 2rem !important;
+                line-height: 1.3 !important;
+            }
+
+            .waste-card {
+                margin-bottom: 1rem;
+            }
+
+            .grid {
+                gap: 1rem !important;
+            }
+
+            .p-8 {
+                padding: 1.5rem !important;
+            }
+
+            .py-20 {
+                padding-top: 3rem !important;
+                padding-bottom: 3rem !important;
+            }
+
+            .mb-16 {
+                margin-bottom: 2rem !important;
+            }
+
+            .space-y-4 > * + * {
+                margin-top: 1rem !important;
+            }
+
+            .flex-wrap {
+                gap: 0.5rem !important;
+            }
+
+            .rounded-super {
+                border-radius: 1rem !important;
+            }
+
+            .glass-effect {
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+            }
+        }
+
+        /* Fix for iOS Safari 100vh issue */
+        @supports (-webkit-touch-callout: none) {
+            #header-animation {
+                height: -webkit-fill-available;
+            }
+        }
+
+        /* Fix for Firefox scrollbar */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--blue) transparent;
+        }
+
+        /* Fix for Chrome scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--blue);
+            border-radius: 20px;
+        }
+
+        /* Fix for text overflow */
+        .truncate {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Fix for image aspect ratios */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Fix for button touch targets on mobile */
+        @media (max-width: 768px) {
+            button, a {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+
+        /* Fix for form elements on mobile */
+        @media (max-width: 768px) {
+            input, select, textarea {
+                font-size: 16px !important; /* Prevents zoom on iOS */
+            }
+        }
+
+        /* Fix for modal/menu z-index */
+        .modal, .menu {
+            z-index: 1000;
+        }
+
+        /* Fix for sticky header */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.5);
+            z-index: -1;
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            color: #333 !important;
+            font-weight: 500;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #333;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-button {
+            background: #333;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            background: #444;
+        }
+
+        .mobile-menu-button {
+            background: #333;
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37,99,235,0.2);
+            background: linear-gradient(120deg, 
+                rgba(37,99,235,0.97) 0%,
+                rgba(34,197,94,0.97) 100%
+            );
+        }
+
+        #mobileMenu {
+            background: linear-gradient(120deg, 
+                rgba(34,197,94,0.97) 0%,
+                rgba(37,99,235,0.97) 100%
+            );
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Fix for footer spacing */
+        footer {
+            margin-top: auto;
+        }
+
+        /* Fix for grid layout on small screens */
+        @media (max-width: 640px) {
+            .grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        /* Fix for text readability */
+        p {
+            line-height: 1.6;
+            max-width: 65ch;
+        }
+
+        /* Add Mailchimp Form Styles */
+        #mc_embed_signup {
+            width: 100%;
+        }
+
+        #mc_embed_signup .response {
+            margin: 1em 0;
+            padding: 1em;
+            border-radius: 0.5rem;
+        }
+
+        #mc_embed_signup .error_response {
+            background-color: #fee2e2;
+            color: #dc2626;
+        }
+
+        #mc_embed_signup .success_response {
+            background-color: #dcfce7;
+            color: #16a34a;
+        }
+
+        #mc_embed_signup input.mce_inline_error {
+            border-color: #dc2626;
+        }
+
+        #mc_embed_signup div.mce_inline_error {
+            margin: 0.5em 0;
+            padding: 0.5em;
+            background-color: #fee2e2;
+            color: #dc2626;
+            font-weight: bold;
+            border-radius: 0.25rem;
+        }
+
+        /* Animated Footer Background */
+        .animated-footer {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animated-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                45deg,
+                rgba(123, 215, 133, 0.1),
+                rgba(79, 201, 232, 0.1),
+                rgba(255, 224, 102, 0.1),
+                rgba(255, 138, 122, 0.1),
+                rgba(166, 138, 255, 0.1)
+            );
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            z-index: 0;
+        }
+
+        .animated-footer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(123, 215, 133, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(79, 201, 232, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 224, 102, 0.1) 0%, transparent 50%);
+            animation: pulseBG 8s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulseBG {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .footer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        /* Mouse Follow Effect */
+        .mouse-follow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .mouse-follow::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(
+                circle at center,
+                rgba(123, 215, 133, 0.1),
+                rgba(79, 201, 232, 0.1),
+                rgba(255, 224, 102, 0.1),
+                rgba(255, 138, 122, 0.1),
+                rgba(166, 138, 255, 0.1)
+            );
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .mouse-follow.active::before {
+            opacity: 1;
+        }
+
+        /* Add hover effect to all interactive elements */
+        a, button, input, select, textarea {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Add subtle hover effect to sections */
+        section {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Add hover effect to cards */
+        .waste-card, .footer-card, .glass-effect {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .waste-card:hover, .footer-card:hover, .glass-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Add these new styles to the existing style section */
+        
+        /* Enhanced Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 5px rgba(123, 215, 133, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(123, 215, 133, 0.8); }
+            100% { box-shadow: 0 0 5px rgba(123, 215, 133, 0.5); }
+        }
+
+        /* Interactive Elements */
+        .interactive-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interactive-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .interactive-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .interactive-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Progress Indicator */
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(to right, var(--green), var(--blue));
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+
+        /* Enhanced Navigation */
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--green), var(--blue));
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Floating Elements */
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Enhanced Buttons */
+        .enhanced-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .enhanced-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .enhanced-button:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Loading States */
+        .loading {
+            position: relative;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Enhanced Form Elements */
+        .enhanced-input {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .enhanced-input:focus {
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(123, 215, 133, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 1rem 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Enhanced Cards */
+        .enhanced-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .enhanced-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--green), var(--blue));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--blue), var(--green));
+        }
+
+        /* Add these styles to enhance the category buttons */
+        .waste-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .waste-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .waste-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .waste-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .waste-card[data-category].active {
+            border: 2px solid;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+    </style>
+
+    <script>
+        // Initialize all functionality when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize progress indicator
+            initProgressIndicator();
+            
+            // Initialize search functionality
+            enhanceSearch();
+            
+            // Setup category buttons
+            setupCategoryButtons();
+            
+            // Setup mobile menu with improved functionality
+            setupMobileMenu();
+        });
+
+        // Progress Indicator
+        function initProgressIndicator() {
+            const progressBar = document.createElement('div');
+            progressBar.className = 'progress-indicator';
+            document.body.appendChild(progressBar);
+
+            window.addEventListener('scroll', () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                progressBar.style.width = scrolled + '%';
+            });
+        }
+
+        // Enhanced Search Experience
+        function enhanceSearch() {
+            const searchInput = document.getElementById('wasteSearch');
+            const suggestionsDiv = document.getElementById('suggestions');
+            const sortButton = document.querySelector('button:has(i.fa-magic)');
+            
+            if (!searchInput || !suggestionsDiv || !sortButton) return;
+
+            let searchTimeout;
+
+            // Function to highlight category
+            function highlightCategory(category) {
+                // Remove highlight from all categories
+                document.querySelectorAll('[data-category]').forEach(btn => {
+                    btn.classList.remove('ring-4', 'ring-green-400', 'ring-opacity-50');
+                    btn.style.transform = 'translateY(0)';
+                });
+
+                // Add highlight to the matching category
+                const categoryButton = document.querySelector(`[data-category="${category}"]`);
+                if (categoryButton) {
+                    categoryButton.classList.add('ring-4', 'ring-green-400', 'ring-opacity-50');
+                    categoryButton.style.transform = 'translateY(-8px)';
+                    
+                    // Scroll the category into view if needed
+                    categoryButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+
+            // Function to handle search
+            function handleSearch() {
+                const query = searchInput.value.toLowerCase().trim();
+                
+                if (query.length < 1) {
+                    suggestionsDiv.classList.add('hidden');
+                    return;
+                }
+
+                suggestionsDiv.classList.remove('hidden');
+                suggestionsDiv.innerHTML = '<div class="p-4 text-center text-gray-500">Searching...</div>';
+
+                // Find matching items
+                const matches = Object.keys(wasteDatabase).filter(item => 
+                    item.toLowerCase().includes(query)
+                );
+
+                if (matches.length > 0) {
+                    const firstMatch = matches[0];
+                    const item = wasteDatabase[firstMatch];
+                    
+                    // Highlight the corresponding category
+                    highlightCategory(item.category);
+
+                    suggestionsDiv.innerHTML = matches.map(item => `
+                        <div class="p-4 hover:bg-red-50 cursor-pointer flex items-center gap-3 border-b border-gray-100 last:border-0 transition-colors duration-200" 
+                             onclick="showResult('${item}'); document.getElementById('suggestions').classList.add('hidden');">
+                            <span class="text-2xl">${wasteDatabase[item].emoji}</span>
+                            <div class="flex-1">
+                                <div class="font-medium">${item}</div>
+                                <div class="text-sm text-gray-500">${wasteDatabase[item].bin}</div>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    `).join('');
+                } else {
+                    suggestionsDiv.innerHTML = `
+                        <div class="p-4 text-center text-gray-500">
+                            No items found. Try a different search term.
+                        </div>
+                    `;
+                }
+            }
+
+            // Add event listeners
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(handleSearch, 300);
+            });
+
+            sortButton.addEventListener('click', handleSearch);
+
+            document.addEventListener('click', (e) => {
+                if (!searchInput.contains(e.target) && !suggestionsDiv.contains(e.target)) {
+                    suggestionsDiv.classList.add('hidden');
+                }
+            });
+
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    suggestionsDiv.classList.add('hidden');
+                } else if (e.key === 'Enter') {
+                    handleSearch();
+                }
+            });
+        }
+
+        // Setup category buttons
+        function setupCategoryButtons() {
+            document.querySelectorAll('[data-category]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    showCategoryItems(category);
+                });
+            });
+        }
+
+        // Setup mobile menu with improved functionality
+        function setupMobileMenu() {
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const body = document.body;
+
+            if (mobileMenuButton && mobileMenu) {
+                // Toggle menu function
+                function toggleMenu() {
+                    mobileMenu.classList.toggle('translate-x-full');
+                    body.classList.toggle('overflow-hidden');
+                    mobileMenuButton.classList.toggle('active');
+                }
+
+                // Toggle menu on button click
+                mobileMenuButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleMenu();
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                        if (!mobileMenu.classList.contains('translate-x-full')) {
+                            toggleMenu();
+                        }
+                    }
+                });
+
+                // Close menu when clicking menu items
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        toggleMenu();
+                    });
+                });
+
+                // Close menu on escape key
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && !mobileMenu.classList.contains('translate-x-full')) {
+                        toggleMenu();
+                    }
+                });
+
+                // Prevent scroll when menu is open
+                mobileMenu.addEventListener('touchmove', (e) => {
+                    if (!mobileMenu.classList.contains('translate-x-full')) {
+                        e.preventDefault();
+                    }
+                }, { passive: false });
+            }
+        }
+
+        // Show result for a specific waste item
+        function showResult(wasteItem) {
+            const item = wasteDatabase[wasteItem];
+            if (!item) return;
+
+            const resultContainer = document.getElementById('resultContainer');
+            if (!resultContainer) return;
+
+            // Highlight the corresponding category
+            const categoryButton = document.querySelector(`[data-category="${item.category}"]`);
+            if (categoryButton) {
+                categoryButton.classList.add('ring-4', 'ring-green-400', 'ring-opacity-50');
+                categoryButton.style.transform = 'translateY(-8px)';
+            }
+
+            resultContainer.innerHTML = `
+                <div class="bg-white rounded-xl p-6 md:p-8 lg:p-10 shadow-lg transform transition-all duration-300 hover:shadow-xl max-w-2xl mx-auto">
+                    <div class="flex flex-col items-center gap-6">
+                        <div class="w-24 h-24 rounded-full bg-${item.color}-100 flex items-center justify-center">
+                            <i class="fas ${item.icon} text-4xl text-${item.color}-500"></i>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-center">${wasteItem}</h3>
+                        <div class="text-center">
+                            <p class="text-lg font-semibold text-${item.color}-600 mb-2">${item.bin}</p>
+                            <p class="text-gray-600">${item.instructions}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Waste Database with categories
+        const wasteDatabase = {
+            // Glass Category
+            "Clear Glass Bottle": { 
+                emoji: "🍶", 
+                icon: "fa-wine-bottle", 
+                color: "blue", 
+                bin: "White Glass Bin", 
+                category: "glass",
+                instructions: "Empty and rinse bottles. Remove caps and dispose separately." 
+            },
+            "Colored Glass Bottle": { 
+                emoji: "🍾", 
+                icon: "fa-wine-bottle", 
+                color: "blue", 
+                bin: "Colored Glass Bin", 
+                category: "glass",
+                instructions: "Empty and rinse bottles. Remove caps and dispose separately." 
+            },
+            "Glass Jar": { 
+                emoji: "🥫", 
+                icon: "fa-jar", 
+                color: "blue", 
+                bin: "Glass Bin", 
+                category: "glass",
+                instructions: "Empty and rinse jars. Remove lids and dispose separately." 
+            },
+
+            // Lightweight Packaging Category
+            "Plastic Bottle": { 
+                emoji: "🥤", 
+                icon: "fa-bottle-water", 
+                color: "yellow", 
+                bin: "Yellow Bin", 
+                category: "plastic",
+                instructions: "Empty, rinse, and flatten if possible." 
+            },
+            "Tetra Pak": { 
+                emoji: "🥛", 
+                icon: "fa-box", 
+                color: "yellow", 
+                bin: "Yellow Bin", 
+                category: "plastic",
+                instructions: "Empty and flatten. Rinse if possible." 
+            },
+            "Aluminum Can": { 
+                emoji: "🥫", 
+                icon: "fa-can-food", 
+                color: "yellow", 
+                bin: "Yellow Bin", 
+                category: "plastic",
+                instructions: "Empty and rinse. Crush if possible." 
+            },
+            "Plastic Container": { 
+                emoji: "🥡", 
+                icon: "fa-box", 
+                color: "yellow", 
+                bin: "Yellow Bin", 
+                category: "plastic",
+                instructions: "Empty and rinse. Remove labels if possible." 
+            },
+
+            // Paper Category
+            "Newspaper": { 
+                emoji: "📰", 
+                icon: "fa-newspaper", 
+                color: "green", 
+                bin: "Paper Bin", 
+                category: "paper",
+                instructions: "Clean and dry newspapers go in the paper bin." 
+            },
+            "Cardboard Box": { 
+                emoji: "📦", 
+                icon: "fa-box", 
+                color: "green", 
+                bin: "Paper Bin", 
+                category: "paper",
+                instructions: "Flatten cardboard boxes before recycling." 
+            },
+            "Office Paper": { 
+                emoji: "📄", 
+                icon: "fa-file", 
+                color: "green", 
+                bin: "Paper Bin", 
+                category: "paper",
+                instructions: "Clean office paper without staples or clips." 
+            },
+            "Pizza Box": { 
+                emoji: "🍕", 
+                icon: "fa-pizza-slice", 
+                color: "green", 
+                bin: "Paper Bin", 
+                category: "paper",
+                instructions: "Clean and grease-free pizza boxes go in the paper bin. If greasy, put in residual waste." 
+            },
+
+            // Residual Waste Category
+            "Diaper": { 
+                emoji: "👶", 
+                icon: "fa-baby", 
+                color: "gray", 
+                bin: "Residual Waste", 
+                category: "residual",
+                instructions: "Place in residual waste bin." 
+            },
+            "Broken Ceramic": { 
+                emoji: "🍽️", 
+                icon: "fa-utensils", 
+                color: "gray", 
+                bin: "Residual Waste", 
+                category: "residual",
+                instructions: "Wrap in paper before disposing." 
+            },
+            "Cigarette Butt": { 
+                emoji: "🚬", 
+                icon: "fa-smoking", 
+                color: "gray", 
+                bin: "Residual Waste", 
+                category: "residual",
+                instructions: "Ensure it's completely extinguished." 
+            },
+
+            // Bio Waste Category
+            "Food Scraps": { 
+                emoji: "🍎", 
+                icon: "fa-apple-whole", 
+                color: "purple", 
+                bin: "Bio Bin", 
+                category: "bio",
+                instructions: "Fruit and vegetable scraps only." 
+            },
+            "Coffee Grounds": { 
+                emoji: "☕", 
+                icon: "fa-mug-hot", 
+                color: "purple", 
+                bin: "Bio Bin", 
+                category: "bio",
+                instructions: "Include coffee filters." 
+            },
+            "Garden Waste": { 
+                emoji: "🌿", 
+                icon: "fa-leaf", 
+                color: "purple", 
+                bin: "Bio Bin", 
+                category: "bio",
+                instructions: "Small branches and leaves only." 
+            },
+
+            // Hazardous Waste Category
+            "Battery": { 
+                emoji: "🔋", 
+                icon: "fa-battery-full", 
+                color: "red", 
+                bin: "Special Collection Point", 
+                category: "hazardous",
+                instructions: "Take to special collection points or battery collection boxes in stores." 
+            },
+            "Paint": { 
+                emoji: "🎨", 
+                icon: "fa-paint-brush", 
+                color: "red", 
+                bin: "Special Collection Point", 
+                category: "hazardous",
+                instructions: "Take to MA48 waste collection centers." 
+            },
+            "Electronic Waste": { 
+                emoji: "📱", 
+                icon: "fa-mobile-screen", 
+                color: "red", 
+                bin: "Special Collection Point", 
+                category: "hazardous",
+                instructions: "Take to electronics stores or MA48 collection centers." 
+            },
+
+            // Bulky Waste Category
+            "Furniture": { 
+                emoji: "🪑", 
+                icon: "fa-couch", 
+                color: "brown", 
+                bin: "MA48 Collection Center", 
+                category: "bulky",
+                instructions: "Take to MA48 waste collection centers." 
+            },
+            "Mattress": { 
+                emoji: "🛏️", 
+                icon: "fa-bed", 
+                color: "brown", 
+                bin: "MA48 Collection Center", 
+                category: "bulky",
+                instructions: "Take to MA48 waste collection centers." 
+            },
+            "Large Appliance": { 
+                emoji: "🧰", 
+                icon: "fa-toolbox", 
+                color: "brown", 
+                bin: "MA48 Collection Center", 
+                category: "bulky",
+                instructions: "Take to MA48 waste collection centers." 
+            }
+        };
+    </script>
+</head>
+<body>
+
+    <!-- 3D Animation Container -->
+    <div id="header-animation"></div>
+
+    <!-- Animated Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute top-20 left-10 w-32 h-32 rounded-full bg-yellow-100 opacity-20 blur-xl"></div>
+        <div class="absolute bottom-1/4 right-20 w-48 h-48 rounded-full bg-green-100 opacity-20 blur-xl"></div>
+        <div class="absolute top-1/3 right-1/4 w-24 h-24 rounded-full bg-blue-100 opacity-20 blur-xl"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="py-4 sticky top-0 z-50 bg-white/80 backdrop-blur-md">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center">
+                <a href="#" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center">
+                        <img src="Vienna Trash Talk.png" alt="Vienna Trash Talk Logo" class="w-full h-full object-cover">
+                    </div>
+                    <span class="font-fredoka text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-blue-500">Vienna Trashtalk</span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#problem" class="nav-link font-fredoka text-xl font-bold text-green-500 hover:text-green-600 transition-colors">The Mess</a>
+                    <a href="#guide" class="nav-link font-fredoka text-xl font-bold text-blue-500 hover:text-blue-600 transition-colors">Sorting Guide</a>
+                    <a href="#map" class="nav-link font-fredoka text-xl font-bold text-green-500 hover:text-green-600 transition-colors">Bin Finder</a>
+                    <a href="#join" class="nav-button font-fredoka text-xl font-bold bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all">
+                        Join Us!
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuButton" class="md:hidden mobile-menu-button relative z-50">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden fixed inset-0 bg-gradient-to-b from-white to-gray-50 transform translate-x-full transition-transform duration-300 ease-in-out z-40">
+                <div class="container mx-auto px-6 py-8">
+                    <div class="flex flex-col space-y-6">
+                        <a href="#problem" class="px-6 py-4 rounded-xl font-medium hover:bg-green-50 transition-all duration-300 flex items-center">
+                            <i class="fas fa-trash text-green-500 mr-3"></i>
+                            The Mess
+                        </a>
+                        <a href="#guide" class="px-6 py-4 rounded-xl font-medium hover:bg-blue-50 transition-all duration-300 flex items-center">
+                            <i class="fas fa-recycle text-blue-500 mr-3"></i>
+                            Sorting Guide
+                        </a>
+                        <a href="#map" class="px-6 py-4 rounded-xl font-medium hover:bg-yellow-50 transition-all duration-300 flex items-center">
+                            <i class="fas fa-map-marker-alt text-yellow-500 mr-3"></i>
+                            Bin Finder
+                        </a>
+                        <a href="#join" class="px-6 py-4 rounded-xl font-bold bg-gradient-to-r from-green-400 to-blue-400 text-white text-center hover:shadow-lg transition-all duration-300">
+                            Join Us!
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-20 pb-32 px-6">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+            
+            <!-- Left Content -->
+            <div class="md:w-1/2 mb-12 md:mb-0">
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-fredoka font-bold leading-tight mb-6">
+                    Let's Recycle <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-blue-500">Right, Vienna!</span>
+                </h1>
+                <p class="text-xl mb-8 text-gray-600 max-w-lg">
+                    Sorting waste shouldn't feel like a pop quiz in German class. Our fun guides make Vienna's recycling system easy for everyone!
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#guide" class="px-8 py-4 rounded-full font-bold bg-gradient-to-r from-green-400 to-blue-400 text-white shadow-lg btn-hover wiggle flex items-center">
+                        Start Sorting <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="#problem" class="px-6 py-3 rounded-full font-medium bg-white shadow-md btn-hover flex items-center">
+                        Why It Matters <i class="fas fa-question-circle ml-2"></i>
+                    </a>
+                </div>
+
+                    <!-- Lottie Animation -->
+                <div class="mt-12">
+                    <dotlottie-wc
+                        src="https://lottie.host/631942d4-39f1-4bc5-aa26-39871111c075/Kck61SJxZs.lottie"
+                        background="transparent"
+                        speed="1"
+                        style="width: 100%; max-width: 500px;"
+                        autoplay
+                        loop
+                    ></dotlottie-wc>
+                </div>
+            </div>
+
+                <!-- Right Video Embed -->
+        <div class="md:w-1/2 flex justify-center items-center">
+            <div class="rounded-3xl overflow-hidden shadow-xl w-full max-w-[700px]">
+                <iframe class="w-full h-[600px] md:h-[600px] lg:h-[600px]" 
+                    src="https://www.youtube.com/embed/HPbOOqAMBmY?si" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="py-20 px-6 bg-white">
+      <div class="container mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="font-fredoka text-4xl md:text-5xl font-bold mb-6">
+            Why Vienna's Recycling Needs
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-green-500">
+              Your Help
+            </span>
+          </h2>
+                    <div class="flex justify-center mb-8">
+                        <div class="w-48 h-48">
+                            <dotlottie-wc
+                                src="https://lottie.host/df1abd16-af72-4781-8815-b42d87903726/tZtWEFVYW8.lottie"
+                                background="transparent"
+                                speed="1"
+                                style="width: 100%; height: 100%;"
+                                loop
+                                autoplay
+                            ></dotlottie-wc>
+                        </div>
+                    </div>
+          <p class="text-xl max-w-3xl mx-auto">
+                      Vienna's waste management system is complex, but together we can make it work better for everyone.
+          </p>
+        </div>
+
+                <!-- Problem Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 waste-card">
+                        <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-6">
+                            <i class="fas fa-recycle text-3xl text-green-500"></i>
+        </div>
+                        <h3 class="text-2xl font-bold mb-4">Complex Sorting Rules</h3>
+                        <p class="text-gray-600">Different materials go in different bins, and some items need special handling. It can be confusing!</p>
+          </div>
+
+          <!-- Card 2 -->
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 waste-card">
+                        <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-6">
+                            <i class="fas fa-language text-3xl text-blue-500"></i>
+        </div>
+                        <h3 class="text-2xl font-bold mb-4">Language Barriers</h3>
+                        <p class="text-gray-600">Instructions are often in German, making it harder for non-German speakers to sort correctly.</p>
+          </div>
+
+          <!-- Card 3 -->
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 waste-card">
+                        <div class="w-16 h-16 rounded-full bg-yellow-100 flex items-center justify-center mb-6">
+                            <i class="fas fa-map-marker-alt text-3xl text-yellow-500"></i>
+        </div>
+                        <h3 class="text-2xl font-bold mb-4">Bin Locations</h3>
+                        <p class="text-gray-600">Finding the right bins for different types of waste can be a challenge in Vienna's neighborhoods.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Superpower Section -->
+        <section class="py-20 px-6 bg-gray-50">
+            <div class="container mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="font-fredoka text-4xl md:text-5xl font-bold mb-6">
+                        Our
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-green-500">
+                            Superpower?
+                        </span>
+                    </h2>
+                    <div class="flex justify-center mb-6">
+                        <div class="w-32 h-32">
+                            <dotlottie-wc
+                                src="https://lottie.host/1d6d3aad-b58b-402f-86ab-83969b02f193/O2fl3DAvKY.lottie"
+                                background="transparent"
+                                speed="1"
+                                style="width: 100%; height: 100%;"
+                                loop
+                                autoplay
+                            ></dotlottie-wc>
+                </div>
+                        </div>
+                    <p class="text-xl max-w-3xl mx-auto mb-8">
+                        We turn confusing recycling rules into simple, visual guides that anyone can follow - no German degree required!
+                    </p>
+                    </div>
+                    
+                <!-- Language Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                    <!-- English Card -->
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 waste-card">
+                        <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-6">
+                            <i class="fas fa-language text-3xl text-blue-500"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">English</h3>
+                        <p class="text-gray-600">Clear instructions in English for Vienna's international community.</p>
+                    </div>
+                    
+                    <!-- Russian Card -->
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 waste-card">
+                        <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-6">
+                            <i class="fas fa-language text-3xl text-green-500"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Russian</h3>
+                        <p class="text-gray-600">Easy-to-follow recycling guides in Russian language.</p>
+                    </div>
+                    
+                    <!-- Turkish Card -->
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 waste-card">
+                        <div class="w-16 h-16 rounded-full bg-yellow-100 flex items-center justify-center mb-6">
+                            <i class="fas fa-language text-3xl text-yellow-500"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Turkish</h3>
+                        <p class="text-gray-600">Simple recycling instructions in Turkish language.</p>
+                    </div>
+                </div>
+                
+                <!-- Visual Guide Card -->
+                <div class="mt-12 max-w-4xl mx-auto">
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 waste-card">
+                        <div class="flex flex-col md:flex-row items-center gap-8">
+                            <div class="w-24 h-24 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-images text-4xl text-purple-500"></i>
+                                </div>
+                            <div>
+                                <h3 class="text-2xl font-bold mb-4">Simple Visuals</h3>
+                                <p class="text-gray-600">Our visual guides make recycling easy to understand, regardless of language barriers. Clear icons and pictures show exactly where each item belongs.</p>
+                                            </div>
+                                            </div>
+                                            </div>
+                                    </div>
+                                </div>
+        </section>
+
+        <!-- Guide Section -->
+        <section id="guide" class="py-20 px-6 bg-gradient-to-b from-gray-50 to-white">
+            <div class="container mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="font-fredoka text-4xl md:text-5xl font-bold mb-6">
+                        Your Easy
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-blue-500">
+                            Sorting Guide
+                        </span>
+                    </h2>
+                    <!-- Add Lottie Animation -->
+                    <div class="flex justify-center mb-8">
+                        <div class="w-48 h-48">
+                            <dotlottie-wc
+                                src="https://lottie.host/1d6d3aad-b58b-402f-86ab-83969b02f193/O2fl3DAvKY.lottie"
+                                background="transparent"
+                                speed="1"
+                                style="width: 100%; height: 100%;"
+                                loop
+                                autoplay
+                            ></dotlottie-wc>
+                        </div>
+                    </div>
+                    <p class="text-xl max-w-3xl mx-auto text-gray-600">
+                        Find out exactly where your waste belongs with our simple sorting tool.
+                    </p>
+                </div>
+
+                <!-- Search Box with Enhanced Design -->
+                <div class="max-w-3xl mx-auto mb-16">
+                    <div class="relative group">
+                        <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-400 rounded-2xl blur opacity-20 group-hover:opacity-30 transition duration-300"></div>
+                        <div class="relative bg-white rounded-2xl p-2 shadow-xl">
+                            <div class="flex items-center">
+                                <div class="flex-1 relative">
+                                    <input type="text" 
+                                           id="wasteSearch" 
+                                           placeholder="What do you want to recycle? Type here..." 
+                                           class="w-full px-6 py-4 rounded-xl border-2 border-gray-100 focus:border-green-400 focus:ring-2 focus:ring-green-200 transition-all duration-300 text-lg pl-12">
+                                    <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                </div>
+                                <button class="ml-2 px-6 py-4 bg-gradient-to-r from-green-400 to-blue-400 text-white rounded-xl font-bold hover:shadow-lg transition-all duration-300 flex items-center">
+                                    <i class="fas fa-magic mr-2"></i>
+                                    Sort It!
+                                </button>
+                            </div>
+                        </div>
+                        <div id="suggestions" class="absolute w-full mt-2 bg-white rounded-xl shadow-lg max-h-96 overflow-y-auto z-50 hidden transform transition-all duration-300"></div>
+                    </div>
+                </div>
+
+                <!-- Quick Categories with Enhanced Design -->
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <!-- Glass Category -->
+                        <div class="group">
+                            <button class="w-full waste-card bg-white rounded-2xl p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" data-category="glass">
+                                <div class="relative">
+                                    <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-wine-bottle text-5xl text-blue-500"></i>
+                                    </div>
+                                    <div class="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                                <h3 class="font-bold text-xl mb-2 text-gray-800">Glass</h3>
+                                <p class="text-sm text-gray-500 mb-3">Bottles & Jars</p>
+                                <div class="h-1 w-12 bg-gradient-to-r from-blue-400 to-green-400 mx-auto rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                            </button>
+                        </div>
+
+                        <!-- Lightweight Packaging Category -->
+                        <div class="group">
+                            <button class="w-full waste-card bg-white rounded-2xl p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" data-category="plastic">
+                                <div class="relative">
+                                    <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-yellow-100 to-yellow-50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-recycle text-5xl text-yellow-500"></i>
+                                    </div>
+                                    <div class="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-yellow-500 text-white flex items-center justify-center text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                                <h3 class="font-bold text-xl mb-2 text-gray-800">Packaging</h3>
+                                <p class="text-sm text-gray-500 mb-3">Plastic & Metal</p>
+                                <div class="h-1 w-12 bg-gradient-to-r from-yellow-400 to-green-400 mx-auto rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                            </button>
+                        </div>
+
+                        <!-- Paper Category -->
+                        <div class="group">
+                            <button class="w-full waste-card bg-white rounded-2xl p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" data-category="paper">
+                                <div class="relative">
+                                    <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-newspaper text-5xl text-green-500"></i>
+                                    </div>
+                                    <div class="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                                <h3 class="font-bold text-xl mb-2 text-gray-800">Paper</h3>
+                                <p class="text-sm text-gray-500 mb-3">Clean & Dry</p>
+                                <div class="h-1 w-12 bg-gradient-to-r from-green-400 to-blue-400 mx-auto rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                            </button>
+                        </div>
+
+                        <!-- Residual Waste Category -->
+                        <div class="group">
+                            <button class="w-full waste-card bg-white rounded-2xl p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" data-category="residual">
+                                <div class="relative">
+                                    <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-gray-100 to-gray-50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-trash text-5xl text-gray-500"></i>
+                                    </div>
+                                    <div class="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-gray-500 text-white flex items-center justify-center text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                                <h3 class="font-bold text-xl mb-2 text-gray-800">Residual</h3>
+                                <p class="text-sm text-gray-500 mb-3">Non-Recyclable</p>
+                                <div class="h-1 w-12 bg-gradient-to-r from-gray-400 to-green-400 mx-auto rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                            </button>
+                        </div>
+
+                        <!-- Bio Category -->
+                        <div class="group">
+                            <button class="w-full waste-card bg-white rounded-2xl p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" data-category="bio">
+                                <div class="relative">
+                                    <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-leaf text-5xl text-purple-500"></i>
+                                    </div>
+                                    <div class="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                                <h3 class="font-bold text-xl mb-2 text-gray-800">Bio</h3>
+                                <p class="text-sm text-gray-500 mb-3">Food & Garden</p>
+                                <div class="h-1 w-12 bg-gradient-to-r from-purple-400 to-green-400 mx-auto rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                            </button>
+                        </div>
+
+                        <!-- Hazardous Waste Category -->
+                        <div class="group">
+                            <button class="w-full waste-card bg-white rounded-2xl p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" data-category="hazardous">
+                                <div class="relative">
+                                    <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-battery-full text-5xl text-red-500"></i>
+                                    </div>
+                                    <div class="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                                <h3 class="font-bold text-xl mb-2 text-gray-800">Hazardous</h3>
+                                <p class="text-sm text-gray-500 mb-3">Special Collection</p>
+                                <div class="h-1 w-12 bg-gradient-to-r from-red-400 to-green-400 mx-auto rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                            </button>
+                        </div>
+
+                        <!-- Bulky Waste Category -->
+                        <div class="group">
+                            <button class="w-full waste-card bg-white rounded-2xl p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" data-category="bulky">
+                                <div class="relative">
+                                    <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-amber-100 to-amber-50 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-couch text-5xl text-amber-500"></i>
+                                    </div>
+                                    <div class="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                                <h3 class="font-bold text-xl mb-2 text-gray-800">Bulky</h3>
+                                <p class="text-sm text-gray-500 mb-3">Large Items</p>
+                                <div class="h-1 w-12 bg-gradient-to-r from-amber-400 to-green-400 mx-auto rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Container with Enhanced Design -->
+                <div id="resultContainer" class="mt-16 max-w-3xl mx-auto"></div>
+
+                <!-- Download Guide Section with Enhanced Design -->
+                <div class="mt-20 max-w-3xl mx-auto">
+                    <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                        <div class="flex flex-col md:flex-row items-center gap-8">
+                            <div class="w-24 h-24 rounded-2xl bg-gradient-to-r from-green-400 to-blue-400 flex items-center justify-center flex-shrink-0 transform hover:rotate-12 transition-transform duration-300">
+                                <i class="fas fa-file-pdf text-4xl text-white"></i>
+                            </div>
+                            <div class="flex-1 text-center md:text-left">
+                                <h3 class="text-2xl font-bold mb-4">Download Full Waste Guide</h3>
+                                <p class="text-gray-600 mb-6">Get our comprehensive guide in multiple languages with cute illustrations 🎨</p>
+                                <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                                    <a href="#" class="px-6 py-3 rounded-xl font-medium bg-gradient-to-r from-green-400 to-blue-400 text-white shadow-lg hover:shadow-xl transition-all duration-300 flex items-center">
+                                        <i class="fas fa-download mr-2"></i>
+                                        English Guide
+                                    </a>
+                                    <a href="#" class="px-6 py-3 rounded-xl font-medium bg-gradient-to-r from-blue-400 to-green-400 text-white shadow-lg hover:shadow-xl transition-all duration-300 flex items-center">
+                                        <i class="fas fa-download mr-2"></i>
+                                        Russian Guide
+                                    </a>
+                                    <a href="#" class="px-6 py-3 rounded-xl font-medium bg-gradient-to-r from-green-400 to-blue-400 text-white shadow-lg hover:shadow-xl transition-all duration-300 flex items-center">
+                                        <i class="fas fa-download mr-2"></i>
+                                        Turkish Guide
+                                    </a>
+                                    <a href="#" class="px-6 py-3 rounded-xl font-medium bg-gradient-to-r from-blue-400 to-green-400 text-white shadow-lg hover:shadow-xl transition-all duration-300 flex items-center">
+                                        <i class="fas fa-download mr-2"></i>
+                                        German Guide
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Burning Questions Section -->
+        <section class="py-20 px-6 bg-white">
+            <div class="container mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="font-fredoka text-4xl md:text-5xl font-bold mb-6">
+                        Burning
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-blue-500">
+                            Recycling Questions
+                        </span>
+                    </h2>
+                    <!-- Add Lottie Animation -->
+                    <div class="flex justify-center mb-8">
+                        <div class="w-48 h-48">
+                            <dotlottie-wc
+                                src="https://lottie.host/f78337af-85ae-48cb-a202-a34b05d66654/1SmonGUvQO.lottie"
+                                background="transparent"
+                                speed="1"
+                                style="width: 100%; height: 100%;"
+                                loop
+                                autoplay
+                            ></dotlottie-wc>
+                        </div>
+                    </div>
+                    <p class="text-xl max-w-3xl mx-auto">
+                        Get answers to the most common recycling questions in Vienna.
+                    </p>
+                                                </div>
+
+                <!-- Questions Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <!-- Question 1 -->
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 waste-card">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-question text-xl text-green-500"></i>
+                                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-3">What goes in the yellow bin?</h3>
+                                <p class="text-gray-600">The yellow bin (Gelbe Tonne) is for plastic packaging, metal containers, and composite materials. This includes plastic bottles, food containers, and aluminum cans.</p>
+                                            </div>
+                                    </div>
+                                </div>
+
+                    <!-- Question 2 -->
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 waste-card">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-question text-xl text-blue-500"></i>
+                                    </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-3">How to sort glass?</h3>
+                                <p class="text-gray-600">Glass should be sorted by color: clear, green, and brown. Remove caps and lids, and make sure bottles are empty and clean.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    <!-- Question 3 -->
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 waste-card">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-question text-xl text-yellow-500"></i>
+                                </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-3">What about pizza boxes?</h3>
+                                <p class="text-gray-600">If the pizza box is clean and grease-free, it goes in the paper bin. If it's greasy or has food residue, it should go in the residual waste bin.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                    <!-- Question 4 -->
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 waste-card">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-question text-xl text-purple-500"></i>
+    </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-3">Bio waste rules?</h3>
+                                <p class="text-gray-600">Bio waste should be free of plastic, meat, fish, and dairy products. Use paper bags or compostable bags for collection.</p>
+                </div>
+                                </div>
+                            </div>
+
+                    <!-- Question 5 -->
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 waste-card">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-question text-xl text-red-500"></i>
+                                </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-3">What about batteries?</h3>
+                                <p class="text-gray-600">Batteries should never go in regular bins. Return them to collection points in supermarkets or special collection centers.</p>
+                            </div>
+                    </div>
+                </div>
+                
+                    <!-- Question 6 -->
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 waste-card">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-question text-xl text-indigo-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-3">Electronics recycling?</h3>
+                                <p class="text-gray-600">Electronic waste can be returned to electronics stores or special collection points. Never put them in regular bins.</p>
+                        </div>
+                            </div>
+                    </div>
+                        </div>
+                        
+                <!-- More Questions Button -->
+                <div class="text-center mt-12">
+                    <button class="px-8 py-4 rounded-full font-bold bg-gradient-to-r from-green-400 to-blue-400 text-white shadow-lg hover:shadow-xl transition-all duration-300">
+                        More Questions <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section id="map" class="py-20 px-6 bg-white">
+      <div class="container mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="font-fredoka text-4xl md:text-5xl font-bold mb-6">
+                        Find Your Nearest
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-green-500">
+                            Recycling Bins
+                        </span>
+          </h2>
+                    <p class="text-xl max-w-3xl mx-auto">
+                        Locate the closest recycling points in your neighborhood.
+                    </p>
+        </div>
+
+          <!-- Map Container -->
+<div class="rounded-2xl overflow-hidden shadow-xl h-[600px]">
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d21250.06393199405!2d16.38559315273629!3d48.25940950043647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476d07018a612a6b%3A0xff38c3f57895999a!2sMA48%20Container-Altstoffsammelstelle!5e0!3m2!1sen!2sat!4v1757855473217!5m2!1sen!2sat"
+    width="100%" 
+    height="100%" 
+    style="border:0;" 
+    allowfullscreen="" 
+    loading="lazy">
+  </iframe>
+</div>
+
+<!-- Locations Table -->
+<div class="mt-10 flex justify-center">
+  <div class="overflow-x-auto w-full max-w-4xl">
+    <table class="table-auto border-collapse border border-gray-300 w-full text-center shadow-md rounded-2xl overflow-hidden">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="border border-gray-300 px-4 py-2">Bezirk (District)</th>
+          <th class="border border-gray-300 px-4 py-2">Mistplatz / Name</th>
+          <th class="border border-gray-300 px-4 py-2">Adresse (Address)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border px-4 py-2">10. Favoriten</td>
+          <td class="border px-4 py-2">Favoriten</td>
+          <td class="border px-4 py-2">Eva-Zilcher-Gasse 3</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">11. Simmering</td>
+          <td class="border px-4 py-2">Simmering</td>
+          <td class="border px-4 py-2">Johann-Petrak-Gasse 1</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">12. Meidling</td>
+          <td class="border px-4 py-2">Hetzendorf</td>
+          <td class="border px-4 py-2">Wundtgasse / Jägerhausgasse</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">14. Penzing</td>
+          <td class="border px-4 py-2">Auhof</td>
+          <td class="border px-4 py-2">Wientalstraße 51</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">16. Ottakring</td>
+          <td class="border px-4 py-2">Ottakring</td>
+          <td class="border px-4 py-2">Kendlerstraße 38a</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">17. Hernals</td>
+          <td class="border px-4 py-2">Hernals</td>
+          <td class="border px-4 py-2">Richthausenstraße 2</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">19. Döbling</td>
+          <td class="border px-4 py-2">Heiligenstadt</td>
+          <td class="border px-4 py-2">Grinzinger Straße 151</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">21. Floridsdorf</td>
+          <td class="border px-4 py-2">Stammersdorf</td>
+          <td class="border px-4 py-2">Nikolsburger Gasse 12</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">21. Floridsdorf</td>
+          <td class="border px-4 py-2">Donaufeld</td>
+          <td class="border px-4 py-2">Fultonstraße 10</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">22. Donaustadt</td>
+          <td class="border px-4 py-2">Stadlau</td>
+          <td class="border px-4 py-2">Mühlwasserstraße 2</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">22. Donaustadt</td>
+          <td class="border px-4 py-2">Rinter (Rinterzelt)</td>
+          <td class="border px-4 py-2">Percostraße 4</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">23. Liesing</td>
+          <td class="border px-4 py-2">Inzersdorf</td>
+          <td class="border px-4 py-2">Südrandstraße 2</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">23. Liesing</td>
+          <td class="border px-4 py-2">Liesing</td>
+          <td class="border px-4 py-2">Seybelgasse 7</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+        <!-- Social Media Section -->
+        <section class="py-20 px-6 bg-white">
+            <div class="container mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="font-fredoka text-4xl md:text-5xl font-bold mb-6">
+                        Follow Our
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-blue-500">
+                            Recycling Adventures
+                        </span>
+                    </h2>
+                    <p class="text-xl max-w-3xl mx-auto">
+                        We make waste sorting fun on social media (yes, really!)
+                    </p>
+                </div>
+                
+                <!-- Social Media Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                    <!-- Instagram Card -->
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 waste-card">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center mb-6">
+                            <i class="fab fa-instagram text-3xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Instagram</h3>
+                        <p class="text-gray-600 mb-6">Daily recycling tips and fun facts about Vienna's waste management.</p>
+                        <a href="#" class="inline-flex items-center text-purple-600 hover:text-purple-700 transition">
+                            @viennatrashtalk <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                                </div>
+
+                    <!-- TikTok Card -->
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 waste-card">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-400 to-cyan-400 flex items-center justify-center mb-6">
+                            <i class="fab fa-tiktok text-3xl text-white"></i>
+                                </div>
+                        <h3 class="text-2xl font-bold mb-4">TikTok</h3>
+                        <p class="text-gray-600 mb-6">Quick recycling hacks and entertaining waste sorting challenges.</p>
+                        <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-700 transition">
+                            @viennatrashtalk <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- YouTube Card -->
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 waste-card">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-r from-red-400 to-orange-400 flex items-center justify-center mb-6">
+                            <i class="fab fa-youtube text-3xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">YouTube</h3>
+                        <p class="text-gray-600 mb-6">In-depth guides and behind-the-scenes of Vienna's recycling system.</p>
+                        <a href="#" class="inline-flex items-center text-red-600 hover:text-red-700 transition">
+                            Vienna Trashtalk <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+        </div>
+      </div>
+    </section>
+
+        <!-- Newsletter Section -->
+        <section id="join" class="py-20 px-6 bg-gray-50">
+            <div class="container mx-auto">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="font-fredoka text-4xl md:text-5xl font-bold mb-6">
+                        Join Our
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-blue-500">
+                            Recycling Community
+                        </span>
+                    </h2>
+                    <p class="text-xl mb-8">
+                        Get weekly tips, updates, and connect with other eco-conscious Vienna residents.
+                    </p>
+
+                    <!-- Mailchimp Form -->
+                    <div id="mc_embed_signup" class="bg-white rounded-2xl p-8 shadow-lg">
+                        <form action="YOUR_MAILCHIMP_FORM_URL" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                            <div class="flex flex-col md:flex-row gap-4">
+                                <input type="email" name="EMAIL" id="mce-EMAIL" placeholder="Your email address" required
+                                       class="flex-1 px-6 py-4 rounded-full border-2 border-gray-200 focus:border-green-400 focus:ring-2 focus:ring-green-200 transition-all duration-300">
+                                <button type="submit" name="subscribe" id="mc-embedded-subscribe"
+                                        class="px-8 py-4 rounded-full font-bold bg-gradient-to-r from-green-400 to-blue-400 text-white shadow-lg hover:shadow-xl transition-all duration-300">
+                                    Subscribe
+                        </button>
+                    </div>
+                        <div id="mce-responses" class="clear">
+                            <div class="response" id="mce-error-response" style="display:none"></div>
+                            <div class="response" id="mce-success-response" style="display:none"></div>
+                </div>
+                    </form>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Footer -->
+        <footer class="py-16 px-6 bg-gradient-to-b from-gray-900 to-gray-950 text-white relative overflow-hidden">
+            <!-- Animated Background Elements -->
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                <div class="absolute top-0 left-0 w-96 h-96 bg-green-500/5 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
+                <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl transform translate-x-1/2 translate-y-1/2"></div>
+            </div>
+
+            <div class="container mx-auto relative z-10">
+                <!-- Main Footer Content -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+                    <!-- Brand Section -->
+                    <div class="md:col-span-4">
+                        <div class="flex items-center space-x-4 mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-400 to-blue-400 flex items-center justify-center transform hover:rotate-12 transition-transform duration-300">
+                                <dotlottie-wc 
+                                    src="https://lottie.host/7bc4bc81-4199-4f42-9319-8c13efb61b5a/VOzXsgCG2u.lottie" 
+                                    background="transparent" 
+                                    speed="1" 
+                                    style="width: 40px; height: 40px;" 
+                                    loop 
+                                    autoplay>
+                                </dotlottie-wc>
+                            </div>
+                            <div>
+                                <h2 class="font-fredoka text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-400">
+                                    Vienna Trashtalk
+                                </h2>
+                                <p class="text-sm text-gray-400">Making Vienna cleaner, together</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 mb-8 leading-relaxed">
+                            Join our mission to make waste sorting in Vienna easier and more fun for everyone. Together, we can create a cleaner, greener city.
+                        </p>
+                        <!-- Newsletter Signup -->
+                        <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+                            <h3 class="text-lg font-semibold mb-4">Stay Updated</h3>
+                            <form class="flex gap-3">
+                                <input type="email" 
+                                       placeholder="Your email" 
+                                       class="flex-1 px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-green-400 focus:ring-2 focus:ring-green-400/20 transition-all duration-300 text-white placeholder-gray-400">
+                                <button type="submit" 
+                                        class="px-6 py-3 rounded-xl bg-gradient-to-r from-green-400 to-blue-400 text-white font-semibold hover:shadow-lg hover:shadow-green-400/20 transition-all duration-300">
+                                    Subscribe
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="md:col-span-2">
+                        <h3 class="text-lg font-semibold mb-6 text-white">Quick Links</h3>
+                        <ul class="space-y-4">
+                            <li>
+                                <a href="#problem" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center group">
+                                    <span class="w-1 h-1 bg-green-400 rounded-full mr-3 group-hover:w-2 transition-all duration-300"></span>
+                                    The Problem
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#guide" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center group">
+                                    <span class="w-1 h-1 bg-blue-400 rounded-full mr-3 group-hover:w-2 transition-all duration-300"></span>
+                                    Sorting Guide
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#map" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center group">
+                                    <span class="w-1 h-1 bg-purple-400 rounded-full mr-3 group-hover:w-2 transition-all duration-300"></span>
+                                    Bin Finder
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#join" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center group">
+                                    <span class="w-1 h-1 bg-yellow-400 rounded-full mr-3 group-hover:w-2 transition-all duration-300"></span>
+                                    Join Us
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Resources -->
+                    <div class="md:col-span-3">
+                        <h3 class="text-lg font-semibold mb-6 text-white">Resources</h3>
+                        <ul class="space-y-4">
+                            <li>
+                                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center group">
+                                    <i class="fas fa-file-pdf text-green-400 mr-3 group-hover:scale-110 transition-transform duration-300"></i>
+                                    Recycling Guide
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center group">
+                                    <i class="fas fa-map-marked-alt text-blue-400 mr-3 group-hover:scale-110 transition-transform duration-300"></i>
+                                    Bin Locations
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center group">
+                                    <i class="fas fa-question-circle text-purple-400 mr-3 group-hover:scale-110 transition-transform duration-300"></i>
+                                    FAQ
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center group">
+                                    <i class="fas fa-book text-yellow-400 mr-3 group-hover:scale-110 transition-transform duration-300"></i>
+                                    Blog
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="md:col-span-3">
+                        <h3 class="text-lg font-semibold mb-6 text-white">Connect With Us</h3>
+                        <div class="grid grid-cols-2 gap-4 mb-8">
+                            <a href="https://www.instagram.com/viennatrashtalk" target="_blank" 
+                               class="flex items-center justify-center p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 group">
+                                <i class="fab fa-instagram text-2xl text-pink-400 group-hover:scale-110 transition-transform duration-300"></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@viennatrashtalk" target="_blank" 
+                               class="flex items-center justify-center p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 group">
+                                <i class="fab fa-tiktok text-2xl text-blue-400 group-hover:scale-110 transition-transform duration-300"></i>
+                            </a>
+                            <a href="https://www.youtube.com/@viennatrashtalk" target="_blank" 
+                               class="flex items-center justify-center p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 group">
+                                <i class="fab fa-youtube text-2xl text-red-400 group-hover:scale-110 transition-transform duration-300"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/company/viennatrashtalk" target="_blank" 
+                               class="flex items-center justify-center p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 group">
+                                <i class="fab fa-linkedin text-2xl text-blue-400 group-hover:scale-110 transition-transform duration-300"></i>
+                            </a>
+                        </div>
+                        <!-- Language Selector -->
+                        <div class="relative">
+                            <select class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-gray-400 focus:border-green-400 focus:ring-2 focus:ring-green-400/20 transition-all duration-300 appearance-none">
+                                <option value="en">English</option>
+                                <option value="de">Deutsch</option>
+                                <option value="ru">Русский</option>
+                                <option value="tr">Türkçe</option>
+                            </select>
+                            <i class="fas fa-chevron-down absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Bar -->
+                <div class="pt-8 border-t border-white/10">
+                    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                        <p class="text-gray-400 text-sm">
+                            © 2025 Vienna Trashtalk. All rights reserved.
+                        </p>
+                        <div class="flex gap-6">
+                            <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Privacy Policy</a>
+                            <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Terms of Service</a>
+                            <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Cookie Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
