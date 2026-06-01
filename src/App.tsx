@@ -1295,7 +1295,7 @@ export default function App() {
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
                     <span className="text-[10px] font-bold text-yellow-600 bg-yellow-50 px-2 py-0.5 rounded-md uppercase tracking-wider font-mono">Gelbe Tonne</span>
-                    <span className="text-[10px] font-bold text-slate-400 font-mono">7 Qs</span>
+                    <span className="text-[10px] font-bold text-slate-400 font-mono">10 Qs</span>
                   </div>
                   <h4 className="text-base font-bold text-slate-900 font-sans">
                     {t.quiz1Title}
@@ -1327,7 +1327,7 @@ export default function App() {
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
                     <span className="text-[10px] font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded-md uppercase tracking-wider font-mono">Problemstoffe</span>
-                    <span className="text-[10px] font-bold text-slate-400 font-mono">6 Qs</span>
+                    <span className="text-[10px] font-bold text-slate-400 font-mono">7 Qs</span>
                   </div>
                   <h4 className="text-base font-bold text-slate-900 font-sans">
                     {t.quiz2Title}
@@ -1359,7 +1359,7 @@ export default function App() {
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
                     <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md uppercase tracking-wider font-mono">Vienna Master</span>
-                    <span className="text-[10px] font-bold text-slate-400 font-mono">8 Qs</span>
+                    <span className="text-[10px] font-bold text-slate-400 font-mono">7 Qs</span>
                   </div>
                   <h4 className="text-base font-bold text-slate-900 font-sans">
                     {t.quiz3Title}
