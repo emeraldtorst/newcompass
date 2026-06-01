@@ -106,6 +106,11 @@ export interface TranslationSetProps {
   emailPlaceholder: string;
   subscribeBtn: string;
   pvtSubscribeSuccess: string;
+  projAboutTitle: string;
+  projAboutSub: string;
+  projAboutDesc: string;
+  projAboutBadge: string;
+  projAboutBtn: string;
   footerAbout: string;
   footerSlogan: string;
   footerAboutDesc: string;

@@ -1386,6 +1386,97 @@ export default function App() {
         </div>
       </section>
 
+      {/* SECTION: ABOUT THE COMPASS PROJECT */}
+      <section id="about-project" className="py-12 sm:py-20 bg-slate-50 border-t border-b border-slate-100 scroll-mt-18">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-3xl border border-slate-200/60 p-8 sm:p-12 shadow-4xs max-w-5xl mx-auto overflow-hidden relative">
+            {/* Background design elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-50 rounded-full blur-3xl -mr-20 -mt-20 opacity-70 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl -ml-20 -mb-20 opacity-70 pointer-events-none" />
+
+            <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              
+              {/* Left Column: Visual Assets & Institutional Badges */}
+              <div className="lg:col-span-5 space-y-6 flex flex-col justify-center">
+                
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-emerald-100/80 rounded-2xl flex items-center justify-center text-emerald-600 shadow-3xs border border-emerald-200/30">
+                    <Compass className="w-6 h-6 text-emerald-600" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">
+                      {t.projAboutBadge}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  {/* ESC Logo Group */}
+                  <div className="flex items-center gap-4 bg-slate-50 p-3.5 rounded-2xl border border-slate-100 shadow-4xs">
+                    <img 
+                      src="/ESC logo.jpg.jpeg" 
+                      alt="European Solidarity Corps Logo" 
+                      className="h-10 object-contain rounded-lg bg-white p-1 hover:scale-105 transition-transform shrink-0 shadow-2xs"
+                    />
+                    <div className="space-y-0.5 text-left">
+                      <p className="text-xs font-black text-slate-800 leading-tight">European Solidarity Corps</p>
+                      <p className="text-[10px] text-slate-500 leading-relaxed font-sans font-medium">Fostering social integration &amp; sustainable cities.</p>
+                    </div>
+                  </div>
+
+                  {/* EU Logo Group */}
+                  <div className="flex items-center gap-4 bg-slate-50 p-3.5 rounded-2xl border border-slate-100 shadow-4xs">
+                    <EUFundedLogo dark={false} className="h-10 border-none bg-transparent shadow-none hover:scale-100 p-0" />
+                    <div className="space-y-0.5 text-left">
+                      <p className="text-xs font-black text-slate-800 leading-tight">Partner Initiative</p>
+                      <p className="text-[10px] text-slate-500 leading-relaxed font-sans font-medium">Co-designed under European solidarity guidelines.</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Right Column: Detailed Explanation & CTA Link */}
+              <div className="lg:col-span-7 space-y-6 text-left">
+                <div className="space-y-2">
+                  <span className="text-emerald-500 font-extrabold uppercase text-xs tracking-widest font-mono">
+                    {t.projAboutTitle}
+                  </span>
+                  <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 font-sans">
+                    {t.projAboutSub}
+                  </h2>
+                </div>
+
+                <p className="text-sm text-slate-600 leading-relaxed font-sans font-medium">
+                  {t.projAboutDesc}
+                </p>
+
+                <div className="bg-emerald-50/50 rounded-2xl p-4 border border-emerald-100/50 flex items-start gap-3 text-left">
+                  <span className="text-lg mt-0.5 select-none">💡</span>
+                  <p className="text-xs text-emerald-800 leading-relaxed font-sans font-medium">
+                    This project is curated to support Vienna's local environmental targets as outlined by MA48, working tirelessly to bridge linguistic gaps and foster an inclusive culture of clean resource circularity.
+                  </p>
+                </div>
+
+                <div className="pt-2 text-left">
+                  <a 
+                    href="https://www.euactive.org/recycling-made-simple-for-expats-vienna-recycling-compass/" 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-slate-800 hover:bg-slate-900 text-white rounded-2xl text-xs sm:text-sm font-bold shadow-sm hover:shadow transition-all group cursor-pointer"
+                  >
+                    <span>{t.projAboutBtn}</span>
+                    <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                  </a>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* SECTION: CONNECT SOCIAL MEDIA SEGMENT */}
       <section className="py-12 sm:py-20 bg-slate-50 border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
